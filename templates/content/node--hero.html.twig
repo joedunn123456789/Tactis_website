@@ -102,35 +102,85 @@
 %}
 {{ attach_library('bootstrap5/node') }}
 <div{{ attributes.addClass(classes) }}>
+  {% if node.field_hero_options.value|raw == 'hero-split' %}
+    {# 50/50 Hero Layout #}
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-12 col-md-6">
+          {# Hero Tag #}
+          <div class="hero-tag text-uppercase fw-semibold mb-4">
+            Welcome to Tactis
+          </div>
+
+          {# Hero Content #}
+          <div class="hero-headline">
+            {% if node.bundle == 'article' %}
+              <div class="return-to-articles pb-5"><a class="link-tactis-primary link-underline-opacity-0 fw-semibold" href="/articles"><i class="bi bi-arrow-left"></i> Back to articles</a></div>
+            {% endif %}
+            {% if node.field_show_title.value|raw == "hero-title" %}
+              {{ label }}
+            {% endif %}
+            {{ content.body }}
+          </div>
+
+          {# Hero Button #}
+          {% if node.field_show_arrow.value|raw == 1 %}
+            <a href="/articles" class="hero-button btn btn-lg fw-semibold d-inline-flex align-items-center text-white mt-3">
+              View Full Series
+              <img src="/themes/custom/tactis_evolve/images/asset_arrow/tactis-button-arrow.svg" class="ms-2" width="16" height="16" alt="Arrow">
+            </a>
+          {% endif %}
+        </div>
+
+        <div class="col-12 col-md-6">
+          {% if content.field_hero_image.0 is not empty %}
+            {% if node.field_use_animation.value and content.field_hero_image[0]['#media'].field_media_json.value %}
+              {{ attach_library('tactis_evolve/lottie') }}
+              <div class="hero-image-container position-relative w-100">
+                <div id="hero-image-animation" class="lottie-animation" data-animation="{{ content.field_hero_image[0]['#media'].field_media_json.value }}"></div>
+              </div>
+            {% else %}
+              <div class="hero-image-container">
+                {{ content.field_hero_image }}
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+  {% else %}
+    {# Original Hero Layouts (Dark/Light) #}
     {% if content.field_hero_image.0 is not empty %}
-    <div class="d-md-flex flex-md-row justify-content-md-between align-items-md-center text-center text-md-start">
-        {% if node.field_use_animation.value and content.field_hero_image[0]['#media'].field_media_json.value %}
+      <div class="d-md-flex flex-md-row justify-content-md-between align-items-md-center text-center text-md-start">
+      {% if node.field_use_animation.value and content.field_hero_image[0]['#media'].field_media_json.value %}
         {% set titleTextClasses = titleTextClasses|merge(['animate-burst']) %}
         {{ attach_library('tactis_evolve/lottie') }}
         <div class="hero-image-container order-md-2 d-inline-block position-relative w-100 animate-header-lottie">
-            <div id="hero-image-animation" class="lottie-animation" data-animation="{{ content.field_hero_image[0]['#media'].field_media_json.value }}"></div>
+          <div id="hero-image-animation" class="lottie-animation" data-animation="{{ content.field_hero_image[0]['#media'].field_media_json.value }}"></div>
         </div>
-        {% else %}
+      {% else %}
         <div class="hero-image-container order-md-2 d-inline-block">
-            {{ content.field_hero_image }}
+          {{ content.field_hero_image }}
         </div>
-        {% endif %}
+      {% endif %}
     {% endif %}
-        <div{{ newAttributes.addClass(titleTextClasses) }}>
-            {% if node.bundle == 'article' %}
-                <div class="return-to-articles pb-5"><a class="link-tactis-primary link-underline-opacity-0 fw-semibold" href="/articles"><i class="bi bi-arrow-left"></i> Back to articles</a></div>
-            {% endif %}
-            {% if node.field_show_title.value|raw == "hero-title" %}
-            {{ label }}
-            {% endif %}
-            {{ content.body }}
-        </div>
-    {% if content.field_hero_image.0 is not empty %}
+    <div{{ newAttributes.addClass(titleTextClasses) }}>
+      {% if node.bundle == 'article' %}
+        <div class="return-to-articles pb-5"><a class="link-tactis-primary link-underline-opacity-0 fw-semibold" href="/articles"><i class="bi bi-arrow-left"></i> Back to articles</a></div>
+      {% endif %}
+      {% if node.field_show_title.value|raw == "hero-title" %}
+        {{ label }}
+      {% endif %}
+      {{ content.body }}
     </div>
+    {% if content.field_hero_image.0 is not empty %}
+      </div>
     {% endif %}
     {% if node.field_show_arrow.value|raw == 1 %}
-    <div class="get-started d-flex align-items-center py-3">
+      <div class="get-started d-flex align-items-center py-3">
         <span>Let's get started</span><i class="bi bi-arrow-down-circle ps-3 fs-5"></i>
-    </div>
+      </div>
     {% endif %}
+  {% endif %}
 </div>
