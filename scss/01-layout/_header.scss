@@ -1,0 +1,153 @@
+
+header {
+  top: 0;
+  z-index: 400;
+  background-color: $white;
+}
+
+body.hero-dark {
+  header {
+    background: $tactis-gradient;
+    height: calc($header-height + $hero-height-sm);
+
+    @include media-breakpoint-up(md){
+      height: calc($header-height + $hero-height-md);
+    }
+    .region-header {
+      //background: $white; //TAC225: Turn Header White
+    }
+  }
+}
+
+.region-header {
+  z-index: 410;
+
+  .logo-menu-container {
+    min-height: 88px;
+
+    .block-system-branding-block {
+      align-self: center;
+    }
+
+    .navbar {
+      .search-icon {
+        margin: 0 30px;
+
+        .bi-search {
+          color: $black;
+        }
+
+      }
+
+      .navbar-toggler {
+
+        #navbar-hamburger {
+          width: 38px;
+          height: 32px;
+
+          span {
+            background-color: $black;
+            height: 3px;
+            border-radius: 1px;
+
+            &:nth-child(1) {
+              width: 80%;
+            }
+
+            &:nth-child(2) {
+              width: 60%;
+              background-color: var(--bs-tactis-primary);
+            }
+
+            &:nth-child(3) {
+              width: 100%;
+            }
+          }
+        }
+
+      }
+
+    }
+  }
+}
+
+body.hero-dark {
+  .region-header {
+    .bi-search {
+      color: $white !important;
+    }
+    #navbar-hamburger span {
+      background-color: $white !important;
+    }
+  }
+}
+
+header .navbar-brand {
+  min-width: 120px;
+  min-height: 88px;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &> a {
+    padding-top: 50%;
+    text-indent: -999px;
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+#toolbar-administration {
+  z-index: 501;
+}
+
+body {
+  &.toolbar-horizontal {
+    header {
+      top: $admin-toolbar-height-collapsed;
+
+      .region-hero {
+        top: calc($header-height + $admin-toolbar-height-collapsed);
+      }
+    }
+
+    &.toolbar-tray-open {
+      header {
+        top: calc($admin-toolbar-height-collapsed + $admin-toolbar-horizontal);
+
+        .region-hero {
+          top: calc($header-height + $admin-toolbar-height-collapsed + $admin-toolbar-horizontal);
+        }
+      }
+    }
+  }
+
+  &.toolbar-vertical {
+    header {
+      top: $admin-toolbar-height-collapsed;
+
+      .region-hero {
+        top: calc($header-height + $admin-toolbar-height-collapsed);
+      }
+    }
+  }
+}
+
+.toolbar .toolbar-bar {
+  position: fixed !important;
+}
+
+// TAC-225: Make logo visible and match Figma specs
+.navbar-brand .site-logo.visually-hidden {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  clip: auto !important;
+  overflow: visible !important;
+
+  img {
+    width: 184px;
+    height: 100px;
+    display: block;
+  }
+}
+

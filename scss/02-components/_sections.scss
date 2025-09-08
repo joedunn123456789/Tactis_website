@@ -1,0 +1,29 @@
+.paragraph--type--section {
+  &.text-white {
+    --section-text-color: $white ;
+  }
+  &.bg-black {
+    --section-bg-color: $black;
+  }
+
+  &.is_parallax {
+
+    .img-container {
+      top: 0;
+      left: 0;
+      clip: auto;
+    }
+
+    .content-container {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+// Remove the last section break line above the footer.
+
+.field--name-field-custom-content .field__item:last-child .paragraph--type--section {
+  border-bottom: none !important;
+}

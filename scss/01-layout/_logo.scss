@@ -1,0 +1,17 @@
+body.hero-light {
+  header .navbar-brand {
+    background-image: $tactis-full-color-logo;
+  }
+}
+
+body.hero-dark {
+  header .navbar-brand {
+    background-image: $tactis-white-colormark-logo;
+  }
+}
+
+header .navbar-brand {
+  min-height: 50px;
+  background-position: center;
+  background-repeat: no-repeat;
+}

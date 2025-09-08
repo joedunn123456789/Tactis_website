@@ -1,0 +1,37 @@
+footer {
+  .region-footer-top {
+    .menu--footer {
+      ul {
+        //display: block;
+        //-webkit-column-count: 2;  /* Chrome, Safari, Opera */
+        //-moz-column-count: 2; /* firefox */
+        //column-count: 2;
+        align-content: space-around;
+        max-height: 215px;
+
+        @include media-breakpoint-up(md){
+          //-webkit-column-count: 3;  /* Chrome, Safari, Opera */
+          //-moz-column-count: 3; /* firefox */
+          //column-count: 3;
+          align-content: space-between;
+          max-height: 170px;
+        }
+      }
+    }
+  }
+
+  .region-footer-bottom {
+    .menu--utility {
+      ul {
+        display: block;
+
+        @include media-breakpoint-up(md){
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+        }
+      }
+    }
+  }
+}

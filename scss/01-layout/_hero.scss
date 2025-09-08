@@ -1,0 +1,107 @@
+.region-hero {
+  z-index: 405;
+  top: $header-height;
+
+  .title-text {
+    min-height: 200px;
+  }
+}
+
+body {
+  &.hero-dark {
+    .region-hero {
+      color: $white;
+    }
+  }
+
+  &.hero-light {
+
+  }
+
+  .region-hero {
+    height: $hero-height-sm;
+
+    @include media-breakpoint-up(md){
+      height: $hero-height-md;
+    }
+
+    .hero-title, .no-title {
+      min-height: calc($hero-height-sm - $hero-title-text-margin-sm);
+
+      @include media-breakpoint-up(md){
+        min-height: calc($hero-height-md - $hero-title-text-margin-md);
+      }
+
+      .lottie-animation {
+        height: 200px;
+
+        @include media-breakpoint-up(lg){
+          height: 350px;
+        }
+        //@include media-breakpoint-up(xl){
+        //  height: 350px;
+        //}
+        @include media-breakpoint-up(xxl){
+          height: 550px;
+        }
+      }
+    }
+
+    .hero-image-container {
+      width: 50%;
+
+      @include media-breakpoint-up(md){
+        width: auto;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .title-text {
+      max-width: none;
+
+      @include media-breakpoint-up(md){
+        max-width: 70%;
+      }
+
+    }
+
+  }
+
+  main {
+    margin-top: calc($hero-height-sm + $header-height);
+    @include media-breakpoint-up(md){
+      margin-top: calc($hero-height-md + $header-height);
+    }
+  }
+}
+
+// TAC-226: Minimal working 50/50 hero
+body.hero-split {
+  .region-hero {
+    background-color: $white;
+  }
+
+  .hero-tag {
+    color: $tactis-primary !important;
+  }
+
+  .hero-headline {
+    font-size: 3.75rem !important;
+    color: #222222 !important;
+    line-height: 1.1 !important;
+  }
+
+  .hero-button {
+    background-color: $tactis-primary !important;
+    border-color: $tactis-primary !important;
+
+    &:hover, &:focus {
+      background-color: $tactis-secondary !important;
+      border-color: $tactis-secondary !important;
+    }
+  }
+}
+
