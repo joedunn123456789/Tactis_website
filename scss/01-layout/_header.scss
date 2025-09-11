@@ -1,11 +1,11 @@
-
 header {
   top: 0;
   z-index: 400;
   background-color: $white;
 }
 
-body.hero-dark {
+// TAC-225: Header styles for Hero Dark / Light
+body.hero-dark, body.hero-light {
   header {
     background: $tactis-gradient;
     height: calc($header-height + $hero-height-sm);
@@ -14,7 +14,37 @@ body.hero-dark {
       height: calc($header-height + $hero-height-md);
     }
     .region-header {
-      //background: $white; //TAC225: Turn Header White
+      @extend .bg-white;
+    }
+  }
+}
+
+// TAC225: Header styles for Hero Split 50/50
+body.hero-split {
+  header {
+    background: $tactis-gradient;
+    height: 70px !important; // Mobile Figma height
+    max-height: 70px !important;
+
+    @include media-breakpoint-up(md){
+      height: 102px !important; // Desktop Figma height
+      max-height: 102px !important;
+    }
+
+    .region-header {
+      @extend .bg-white;
+    }
+  }
+
+  // TAC225: Header container for mobile / desktop
+  .region-header .logo-menu-container {
+    @extend .py-1;
+    min-height: 70px; // Mobile height
+    max-height: 70px;
+
+    @include media-breakpoint-up(md){
+      min-height: 102px; // Desktop height
+      max-height: 102px;
     }
   }
 }
@@ -22,8 +52,69 @@ body.hero-dark {
 .region-header {
   z-index: 410;
 
+  //TAC225: Add border using Bootstrap utility and exact Figma color on header container
+  @extend .border-bottom;
+  border-bottom-color: #DDDDDD !important;
+
+  //TAC225: Desktop navigation styling for existing template
   .logo-menu-container {
-    min-height: 88px;
+    min-height: auto;
+    @extend .py-2; // Add flexible padding
+    @extend .align-items-center; // Vertical Center
+    @extend .d-flex; // flexbot
+    @extend .justify-content-between; // Proper Spacing
+
+    // TAC225: Desktop navigation styling
+    .desktop-nav {
+      .nav-link {
+        color: $black !important;
+        font-size: 0.9rem;
+        text-decoration: none !important;
+
+        &:hover {
+          color: var(--bs-tactis-primary) !important;
+        }
+      }
+    }
+
+    // TAC225: Desktop right section (search + contact)
+    .desktop-right {
+      .search-icon {
+        .bi-search {
+          color: $black;
+          font-size: 1.1rem;
+
+          &:hover {
+            color: var(--bs-tactis-primary);
+          }
+        }
+      }
+
+      .vertical-separator {
+        width: 1px;
+        height: 60px;
+        background-color: $black;
+        align-self: center;
+      }
+
+      .btn-outline-dark {
+        border: none !important;
+        background-color: transparent !important;
+        border-radius: 0 !important;
+        color: var(--bs-tactis-primary) !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        font-size: 0.9rem !important;
+        padding: 0.5rem 1rem !important;
+        box-shadow: none !important;
+
+        &:hover, &:focus, &:active {
+          background-color: transparent !important;
+          color: var(--bs-tactis-primary) !important;
+          box-shadow: none !important;
+        }
+      }
+    }
 
     .block-system-branding-block {
       align-self: center;
@@ -36,7 +127,6 @@ body.hero-dark {
         .bi-search {
           color: $black;
         }
-
       }
 
       .navbar-toggler {
@@ -71,7 +161,8 @@ body.hero-dark {
   }
 }
 
-body.hero-dark {
+// TAC-225: Search and hamburger colors for ALL hero types
+body.hero-dark, body.hero-light {
   .region-header {
     .bi-search {
       color: $white !important;
@@ -82,17 +173,19 @@ body.hero-dark {
   }
 }
 
-header .navbar-brand {
-  min-width: 120px;
-  min-height: 88px;
-  background-position: center;
-  background-repeat: no-repeat;
+// TAC-225: Split hero black icons (visible against white background)
+body.hero-split {
+  .region-header {
+    .bi-search {
+      color: $black !important;
+    }
+    #navbar-hamburger span {
+      background-color: $black !important;
 
-  &> a {
-    padding-top: 50%;
-    text-indent: -999px;
-    display: inline-block;
-    width: 100%;
+      &:nth-child(2) {
+        background-color: var(--bs-tactis-primary) !important;
+      }
+    }
   }
 }
 
@@ -136,18 +229,71 @@ body {
   position: fixed !important;
 }
 
-// TAC-225: Make logo visible and match Figma specs
-.navbar-brand .site-logo.visually-hidden {
-  position: static !important;
-  width: auto !important;
-  height: auto !important;
-  clip: auto !important;
-  overflow: visible !important;
+// TAC-225: Override navbar-brand constraints for logo positioning
+.navbar-brand {
+  // Override Bootstrap's default padding that pushes content down
+  @extend .p-0;
+  min-height: auto !important;
+  @extend .m-0;
+  @extend .d-flex;
+  @extend .align-items-center;
 
-  img {
-    width: 184px;
-    height: 100px;
-    display: block;
+  .site-logo {
+    // Override visually-hidden using Bootstrap utility approach
+    @extend .position-static;
+    @extend .w-auto;
+    @extend .h-auto;
+    @extend .overflow-visible;
+    @extend .d-flex;
+    @extend .align-items-center;
+
+    // Remove the clip property
+    clip: auto !important;
+
+    // Now the logo can position freely without container constraints
+    transform: translateY(-2px); // Adjust this value as needed
+
+    img {
+      @extend .img-fluid;
+      max-width: 184px !important;
+      max-height: 100px !important;
+      display: block !important;
+    }
   }
 }
+
+// TAC-225: fix for frozen "Welcome to Tactis" text on mobile
+@media (max-width: 767.98px) {
+
+  body.hero-split {
+    // Force EVERYTHING to not be sticky/fixed
+    * {
+      position: static !important;
+    }
+
+    // Except the header which needs to stay sticky
+    header,
+    .region-header {
+      position: sticky !important;
+    }
+
+    // Specifically target the frozen welcome text
+    .hero-tag {
+      position: static !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+    }
+
+    // And its containers
+    .node--view-mode-hero,
+    .hero-split,
+    .contextual-region {
+      position: static !important;
+      top: auto !important;
+    }
+  }
+}
+
 
