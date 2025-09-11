@@ -27,7 +27,38 @@
         <div class="col-12 logo-menu-container d-flex flex-row flex-nowrap justify-content-between">
           {{ content }}
 
-          <nav class="navbar align-items-end">
+          {# TAC:225 NEW: Desktop Navigation - Bootstrap first approach #}
+          <nav class="desktop-nav d-none d-lg-flex align-items-center justify-content-center flex-grow-1">
+            <ul class="nav gap-4 m-0 list-unstyled">
+              <li class="nav-item">
+                <a class="nav-link text-uppercase fw-semibold text-dark px-0" href="/solutions">Solutions</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-uppercase fw-semibold text-dark px-0" href="/our-work">Work</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-uppercase fw-semibold text-dark px-0" href="/about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-uppercase fw-semibold text-dark px-0" href="/articles">Articles</a>
+              </li>
+            </ul>
+          </nav>
+          {# TAC:225 NEW: Desktop Right Search and Contact#}
+          <div class="desktop-right d-none d-lg-flex align-items-center gap-3">
+            <div class="search-icon">
+              <a href="/search">
+                <i class="bi bi-search"></i>
+              </a>
+            </div>
+
+            <div class="vertical-separator"></div>
+
+            <a href="/contact" class="btn btn-outline-dark text-uppercase fw-semibold px-4 py-2">Contact</a>
+          </div>
+
+          {# TAC225: Add Mobile View d-lg-none#}
+          <nav class="navbar align-items-end d-lg-none">
             <div class="container-fluid">
               <div class="search-icon">
                 <a href="/search">
