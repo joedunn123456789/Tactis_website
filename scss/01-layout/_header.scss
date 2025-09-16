@@ -4,7 +4,7 @@ header {
   background-color: $white;
 }
 
-// TAC-225: Header styles for Hero Dark / Light
+// TAC-225: Configure header style for Hero Dark / Light
 body.hero-dark, body.hero-light {
   header {
     background: $tactis-gradient;
@@ -19,16 +19,16 @@ body.hero-dark, body.hero-light {
   }
 }
 
-// TAC225: Header styles for Hero Split 50/50
+// TAC225: Configure header style for Hero Split 50/50
 body.hero-split {
   header {
     background: $tactis-gradient;
     height: 70px !important; // Mobile Figma height
-    max-height: 70px !important;
+    max-height: 70px !important; //Mobile Figma max height
 
     @include media-breakpoint-up(md){
       height: 102px !important; // Desktop Figma height
-      max-height: 102px !important;
+      max-height: 102px !important; //Desktop Figma max height
     }
 
     .region-header {
@@ -52,7 +52,7 @@ body.hero-split {
 .region-header {
   z-index: 410;
 
-  //TAC225: Add border using Bootstrap utility and exact Figma color on header container
+  //TAC225: Per figma, add horizontal bottom border using Bootstrap utility and exact color on header container
   @extend .border-bottom;
   border-bottom-color: #DDDDDD !important;
 
@@ -61,7 +61,7 @@ body.hero-split {
     min-height: auto;
     @extend .py-2; // Add flexible padding
     @extend .align-items-center; // Vertical Center
-    @extend .d-flex; // flexbot
+    @extend .d-flex; // flex
     @extend .justify-content-between; // Proper Spacing
 
     // TAC225: Desktop navigation styling
@@ -262,7 +262,7 @@ body {
   }
 }
 
-// TAC-225: fix for frozen "Welcome to Tactis" text on mobile
+// TAC-225: fix for frozen text on mobile
 @media (max-width: 767.98px) {
 
   body.hero-split {
@@ -295,5 +295,3 @@ body {
     }
   }
 }
-
-
