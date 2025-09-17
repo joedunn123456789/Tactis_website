@@ -1,37 +1,96 @@
 footer {
   .region-footer-top {
-    .menu--footer {
-      ul {
-        //display: block;
-        //-webkit-column-count: 2;  /* Chrome, Safari, Opera */
-        //-moz-column-count: 2; /* firefox */
-        //column-count: 2;
-        align-content: space-around;
-        max-height: 215px;
+    // Logo styling - keep exactly as you had it
+    .tactis-logo-white {
+      width: 133px !important;
+      height: 56px !important;
+      min-height: 56px;
+      min-width: 133px;
+      max-width: 133px;
+      max-height: 56px;
+      background-size: 133px 56px;
 
-        @include media-breakpoint-up(md){
-          //-webkit-column-count: 3;  /* Chrome, Safari, Opera */
-          //-moz-column-count: 3; /* firefox */
-          //column-count: 3;
-          align-content: space-between;
-          max-height: 170px;
+      a {
+        width: 133px;
+        height: 56px;
+        display: block;
+      }
+    }
+
+    // Social icons - keep exactly as you had it
+    .menu--footer-social {
+      ul {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        gap: 1rem;
+      }
+
+      li {
+        display: inline-block;
+      }
+
+      a {
+        font-size: 0;
+
+        &::before {
+          font-family: bootstrap-icons !important;
+          font-size: 1.5rem;
+          display: inline-block;
+        }
+
+        &[href*="facebook"]::before {
+          content: "\f344";
+        }
+
+        &[href*="linkedin"]::before {
+          content: "\f472";
         }
       }
     }
   }
 
   .region-footer-bottom {
-    .menu--utility {
-      ul {
-        display: block;
+    // Keep your existing layout approach
+    .d-md-flex {
+      justify-content: space-between !important;
+      align-items: center !important;
+    }
 
-        @include media-breakpoint-up(md){
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
+    // Just reduce the gap between navigation blocks
+    .block-menu {
+      display: inline-block;
+      margin-left: 0.5rem; // Reduced from 1rem to 0.5rem
 
-        }
+      &:first-of-type {
+        margin-left: 0;
       }
+
+      // Keep your existing nav styling
+      .nav.navbar-nav {
+        display: flex !important;
+        flex-direction: row !important;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 1rem; // Reduced from 1.5rem to 1rem
+      }
+
+      .nav-item {
+        display: inline-block;
+      }
+
+      .nav-link {
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    // Keep the spacing adjustment you had
+    .block-menu:not(:first-child) {
+      margin-left: 0.5rem; // Reduced from 0.75rem to 0.5rem
     }
   }
 }
