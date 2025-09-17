@@ -14,12 +14,12 @@
 #}
 {%
   set classes = [
-    'region',
-    'region-' ~ region|clean_class,
-    'bg-black',
-    'text-white',
-    'py-5',
-  ]
+  'region',
+  'region-' ~ region|clean_class,
+  'bg-black',
+  'text-white',
+  'py-5',
+]
 %}
 {% if content %}
   <div{{ attributes.addClass(classes) }}>
