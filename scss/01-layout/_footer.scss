@@ -1,6 +1,6 @@
 footer {
   .region-footer-top {
-    // Logo styling - keep exactly as you had it
+    // Keep all your existing logo and social styles exactly as they are
     .tactis-logo-white {
       width: 133px !important;
       height: 56px !important;
@@ -17,7 +17,6 @@ footer {
       }
     }
 
-    // Social icons - keep exactly as you had it
     .menu--footer-social {
       ul {
         display: flex;
@@ -53,29 +52,33 @@ footer {
   }
 
   .region-footer-bottom {
-    // Keep your existing layout approach
+    // Override the justify-content-between behavior
     .d-md-flex {
-      justify-content: space-between !important;
+      justify-content: flex-start !important; // Change from space-between to flex-start
       align-items: center !important;
     }
 
-    // Just reduce the gap between navigation blocks
+    // Make copyright block stay on the left with margin-right auto
+    #block-tactis-evolve-copyrightstatement {
+      margin-right: auto !important; // This pushes everything else to the right
+    }
+
+    // Group the navigation blocks close together
     .block-menu {
-      display: inline-block;
-      margin-left: 0.5rem; // Reduced from 1rem to 0.5rem
+      display: inline-block !important;
+      margin-left: 1rem !important; // Small gap between nav blocks
 
       &:first-of-type {
-        margin-left: 0;
+        margin-left: 2rem !important; // Slightly larger gap from copyright
       }
 
-      // Keep your existing nav styling
       .nav.navbar-nav {
         display: flex !important;
         flex-direction: row !important;
         list-style: none;
         margin: 0;
         padding: 0;
-        gap: 1rem; // Reduced from 1.5rem to 1rem
+        gap: 1.5rem; // Space between items within each menu
       }
 
       .nav-item {
@@ -86,11 +89,6 @@ footer {
         padding: 0;
         margin: 0;
       }
-    }
-
-    // Keep the spacing adjustment you had
-    .block-menu:not(:first-child) {
-      margin-left: 0.5rem; // Reduced from 0.75rem to 0.5rem
     }
   }
 }
