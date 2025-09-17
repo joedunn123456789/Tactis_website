@@ -14,19 +14,33 @@
 #}
 {%
   set classes = [
-    'region',
-    'region-' ~ region|clean_class,
-    'bg-black',
-    'text-light',
-    'py-5',
-  ]
+  'region',
+  'region-' ~ region|clean_class,
+  'bg-black',
+  'text-light',
+  'py-5',
+]
 %}
 {% if content %}
   <div{{ attributes.addClass(classes) }}>
     <div class="container">
       <div class="row">
-        <div class="d-md-flex flex-md-nowrap justify-content-md-between align-items-md-center">
-          {{ content }}
+        <div class="d-md-flex flex-md-nowrap justify-content-md-between align-items-md-start">
+          {# Left side: Logo and Address - Give it more space #}
+          <div class="d-flex flex-column col-12 col-md-6">
+            {# Add Tactis logo #}
+            <div class="mb-3">
+              <div class="tactis-logo-white">
+                <a href="/" title="Home">Tactis, LLC</a>
+              </div>
+            </div>
+            {# Address content #}
+            {{ content }}
+          </div>
+          {# Right side: Space for navigation #}
+          <div class="col-12 col-md-6">
+            {# Navigation will go here later #}
+          </div>
         </div>
       </div>
     </div>
