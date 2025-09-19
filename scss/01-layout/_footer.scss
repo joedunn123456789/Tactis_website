@@ -1,13 +1,44 @@
 footer {
+  .region-footer-top-right {
+    .webform-submission-form {
+      float: right !important;
+      clear: both !important;
+      width: 400px !important;
+
+      .js-form-item-stayconnectedemail {
+        display: inline-block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        vertical-align: top !important;
+
+        input {
+          width: 340px !important;
+          height: 60.28px !important;
+          box-sizing: border-box !important;
+        }
+      }
+
+      .form-actions {
+        display: inline-block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        vertical-align: top !important;
+        margin-left: -1px !important;
+
+        input {
+          width: 60px !important;
+          height: 60.28px !important;
+          box-sizing: border-box !important;
+          margin: 0 !important;
+        }
+      }
+    }
+  }
+
   .region-footer-top {
-    // Keep all your existing logo and social styles exactly as they are
     .tactis-logo-white {
       width: 133px !important;
       height: 56px !important;
-      min-height: 56px;
-      min-width: 133px;
-      max-width: 133px;
-      max-height: 56px;
       background-size: 133px 56px;
 
       a {
@@ -40,36 +71,65 @@ footer {
           display: inline-block;
         }
 
-        &[href*="facebook"]::before {
-          content: "\f344";
-        }
-
-        &[href*="linkedin"]::before {
-          content: "\f472";
-        }
+        &[href*="facebook"]::before { content: "\f344"; }
+        &[href*="linkedin"]::before { content: "\f472"; }
       }
+    }
+
+
+    .webform-submission-form {
+      text-align: right !important;
+
+      .js-form-item-stayconnectedemail,
+      .form-actions {
+        float: left !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      &::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+
+    #edit-stayconnectedemail {
+      width: 340px !important;
+      height: 60.28px !important;
+      box-sizing: border-box !important;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+
+    #edit-actions-submit {
+      width: 60px !important;
+      height: 60.28px !important;
+      box-sizing: border-box !important;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      border-left: none !important;
+      background-color: var(--bs-tactis-primary) !important;
+      border-color: var(--bs-tactis-primary) !important;
     }
   }
 
   .region-footer-bottom {
-    // Override the justify-content-between behavior
     .d-md-flex {
-      justify-content: flex-start !important; // Change from space-between to flex-start
+      justify-content: flex-start !important;
       align-items: center !important;
     }
 
-    // Make copyright block stay on the left with margin-right auto
     #block-tactis-evolve-copyrightstatement {
-      margin-right: auto !important; // This pushes everything else to the right
+      margin-right: auto !important;
     }
 
-    // Group the navigation blocks close together
     .block-menu {
       display: inline-block !important;
-      margin-left: 1rem !important; // Small gap between nav blocks
+      margin-left: 1rem !important;
 
       &:first-of-type {
-        margin-left: 2rem !important; // Slightly larger gap from copyright
+        margin-left: 2rem !important;
       }
 
       .nav.navbar-nav {
@@ -78,7 +138,7 @@ footer {
         list-style: none;
         margin: 0;
         padding: 0;
-        gap: 1.5rem; // Space between items within each menu
+        gap: 1.5rem;
       }
 
       .nav-item {
