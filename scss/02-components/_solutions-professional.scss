@@ -1,0 +1,171 @@
+// Truly Adaptive Solutions Component SCSS - Professional Version
+// File: scss/02-components/_solutions-professional.scss
+//
+// PHILOSOPHY:
+// - Bootstrap does 90% of the work
+// - Only add CSS where Bootstrap can't handle it
+// - Use Bootstrap's utility system
+// - Component adapts to ANY section background
+// - Clean, maintainable, future-proof
+
+// ================================
+// ADAPTIVE GHOST BUTTON
+// ================================
+// This button adapts to any background color automatically
+.adaptive-outline-btn {
+  // Base styles: transparent with inherited border/text colors
+  background-color: transparent !important;
+  border: 2px solid currentColor !important;
+  color: inherit !important;
+  transition: all 0.3s ease !important;
+  padding: 0.75rem 2rem !important;
+
+  // Hover state: background becomes current text color
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: currentColor !important;
+    border-color: currentColor !important;
+    box-shadow: none !important;
+  }
+
+  // Arrow animation enhancement
+  .bi-arrow-right {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover .bi-arrow-right {
+    transform: translateX(4px);
+  }
+}
+
+// ================================
+// SOLUTION LINKS STYLING
+// ================================
+.view-solutions {
+
+  .solutions-list {
+
+    .solution-item {
+      // Subtle border using current color
+      border-bottom: 1px solid currentColor;
+      opacity: 0.2;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .solution-link {
+      // Inherits color from section
+      color: inherit !important;
+      transition: all 0.3s ease;
+      font-size: 1.25rem;
+      font-weight: 500;
+
+      &:hover {
+        color: inherit !important;
+        text-decoration: underline !important;
+        text-underline-offset: 4px;
+        text-decoration-thickness: 2px;
+        padding-left: 0.5rem;
+      }
+
+      &:focus {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+        text-decoration: underline !important;
+      }
+    }
+  }
+
+  // ================================
+  // RESPONSIVE ENHANCEMENTS
+  // ================================
+  @include media-breakpoint-down(md) {
+    .adaptive-outline-btn {
+      font-size: 1rem !important;
+      padding: 0.75rem 1.5rem !important;
+    }
+
+    .solution-link {
+      font-size: 1.1rem !important;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    .solution-link {
+      font-size: 1.3rem !important;
+    }
+  }
+}
+
+// ================================
+// SECTION BACKGROUND ADAPTATION
+// ================================
+// The magic happens here: button text color adapts on hover
+
+// Dark sections: White text, on hover white background with dark text
+.bg-dark,
+.bg-black,
+.bg-tactis-secondary,
+.bg-tactis-tertiary {
+
+  .adaptive-outline-btn {
+    &:hover,
+    &:focus,
+    &:active {
+      // White background, dark text
+      color: $tactis-secondary !important;
+    }
+  }
+}
+
+// Light sections: Dark text, on hover dark background with white text
+.bg-light,
+.bg-white {
+
+  .adaptive-outline-btn {
+    &:hover,
+    &:focus,
+    &:active {
+      // Dark background, white text
+      color: $white !important;
+    }
+  }
+}
+
+// Default (no background): Dark text, on hover dark background with white text
+:not([class*="bg-"]) {
+  .view-solutions {
+    color: $black;
+
+    .adaptive-outline-btn {
+      &:hover,
+      &:focus,
+      &:active {
+        color: $white !important;
+      }
+    }
+  }
+}
+
+// ================================
+// SECTION SPACING UTILITIES
+// ================================
+// Helper classes for content admins
+
+.section-solutions {
+  // Standard section padding
+  @extend .py-5;
+
+  // Dark plum variant (main Figma design)
+  &.bg-tactis-secondary {
+    @extend .text-light;
+  }
+
+  // Light variant
+  &.bg-white {
+    @extend .text-dark;
+  }
+}
