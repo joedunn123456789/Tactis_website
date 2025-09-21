@@ -1,6 +1,6 @@
+// Fixed hero SCSS - Remove gradient background for hero-split
 .region-hero {
   z-index: 405;
-  top: $header-height;
 
   .title-text {
     min-height: 200px;
@@ -8,21 +8,108 @@
 }
 
 body {
+  &.hero-dark, &.hero-light {
+    header {
+      background: $tactis-gradient; // Keep gradient for dark/light heroes
+      height: calc($header-height + $hero-height-sm); // 88px + 375px = 463px mobile
+
+      @include media-breakpoint-up(md){
+        height: calc($header-height + $hero-height-md); // 88px + 450px = 538px desktop
+      }
+
+      .region-header {
+        @extend .bg-white;
+      }
+    }
+
+    // ONLY dark/light heroes need the top positioning for overlay effect
+    .region-hero {
+      top: $header-height; // 88px positioning for overlay
+      color: $white; // Default to white, override in &.hero-light if needed
+    }
+  }
+
   &.hero-dark {
     .region-hero {
       color: $white;
     }
   }
 
-  &.hero-light {
+  &.hero-split {
+    header {
+      // REMOVED: background: $tactis-gradient; - This was causing the dark section
+      background: $white; // Use white background for split hero
+      height: $header-height; // Only header height, no extra hero height
 
+      .region-header {
+        @extend .bg-white;
+      }
+    }
+
+    .region-hero {
+      background-color: $white;
+      // CRITICAL: NO top positioning - let it flow naturally
+      position: relative !important; // Force relative positioning
+      top: auto !important; // Override any inherited top values
+    }
+
+    // Fix any child elements that might be sticking
+    .hero-image-container {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+
+      img {
+        position: static !important; // Ensure images don't stick
+        top: auto !important;
+        left: auto !important;
+      }
+    }
+
+    .lottie-animation {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+    }
+
+    .hero-tag {
+      color: $tactis-primary !important;
+      position: relative !important;
+      top: auto !important;
+    }
+
+    .hero-headline {
+      font-size: 3.75rem !important;
+      color: #222222 !important;
+      line-height: 1.1 !important;
+      position: relative !important;
+      top: auto !important;
+    }
+
+    .hero-button {
+      background-color: $tactis-primary !important;
+      border-color: $tactis-primary !important;
+      position: relative !important;
+      top: auto !important;
+
+      &:hover, &:focus {
+        background-color: $tactis-secondary !important;
+        border-color: $tactis-secondary !important;
+      }
+    }
+
+    // Ensure all containers flow normally
+    .container, .row, .col-12, .col-md-6 {
+      position: relative !important;
+      top: auto !important;
+    }
   }
 
   .region-hero {
-    height: $hero-height-sm;
+    height: $hero-height-sm; // 375px mobile
 
     @include media-breakpoint-up(md){
-      height: $hero-height-md;
+      height: $hero-height-md; // 450px desktop
     }
 
     .hero-title, .no-title {
@@ -38,9 +125,6 @@ body {
         @include media-breakpoint-up(lg){
           height: 350px;
         }
-        //@include media-breakpoint-up(xl){
-        //  height: 350px;
-        //}
         @include media-breakpoint-up(xxl){
           height: 550px;
         }
@@ -65,44 +149,44 @@ body {
       @include media-breakpoint-up(md){
         max-width: 70%;
       }
-
     }
-
   }
 
   main {
-    margin-top: calc($hero-height-sm + $header-height);
+    // Different margin calculations for each hero type
+    margin-top: calc($hero-height-sm + $header-height); // Default for dark/light heroes
+
     @include media-breakpoint-up(md){
       margin-top: calc($hero-height-md + $header-height);
     }
   }
-}
 
-// TAC-226: Minimal working 50/50 hero
-// TAC-226: Minimal SCSS
-body.hero-split {
-  .region-hero {
-    background-color: $white;
-  }
+  // Override main margin for hero-split to only account for header
+  &.hero-split main {
+    margin-top: calc($header-height + $hero-height-sm); // Header + hero content height
 
-  .hero-tag {
-    color: $tactis-primary !important;
-  }
-
-  .hero-headline {
-    font-size: 3.75rem !important;
-    color: #222222 !important;
-    line-height: 1.1 !important;
-  }
-
-  .hero-button {
-    background-color: $tactis-primary !important;
-    border-color: $tactis-primary !important;
-
-    &:hover, &:focus {
-      background-color: $tactis-secondary !important;
-      border-color: $tactis-secondary !important;
+    @include media-breakpoint-up(md){
+      margin-top: calc($header-height + $hero-height-md);
     }
   }
 }
 
+// Additional mobile-specific fixes
+@media (max-width: 767.98px) {
+  body.hero-split {
+    // Force everything in hero-split to be static on mobile
+    .region-hero * {
+      position: static !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+    }
+
+    // Ensure header still works
+    header, .region-header {
+      position: sticky !important;
+      top: 0 !important;
+    }
+  }
+}
