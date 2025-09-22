@@ -1,41 +1,16 @@
 {#
 /**
  * @file
- * Theme override for solutions view - UPDATED FOR TAC-227
+ * Theme override for Solutions View Block - TAC-227
  *
- * CHANGES FOR TAC-227:
- * - Replaced accordion layout with Bootstrap two-column layout
- * - Added title, description, and button to left column
- * - Simple solution links in right column (no accordion)
- * - Bootstrap-first approach with minimal custom CSS
- * - Works with any section background (follows Anthony's guidance)
- * - ADAPTIVE: Button and text colors inherit from section
+ * CLEAN VERSION FOR NEW VIEW BLOCK:
+ * - No accordion CSS interference
+ * - Two-column Bootstrap layout
+ * - Left: title, description, button
+ * - Right: simple solution links
+ * - Text colors should work properly without accordion baggage
  *
- * Available variables:
- * - attributes: Remaining HTML attributes for the element.
- * - css_name: A CSS-safe version of the view name.
- * - css_class: The user-specified classes names, if any.
- * - header: The optional header.
- * - footer: The optional footer.
- * - rows: The results of the view query, if any.
- * - empty: The content to display if there are no rows.
- * - pager: The optional pager next/prev links to display.
- * - exposed: Exposed widget form/info to display.
- * - feed_icons: Optional feed icons to display.
- * - more: An optional link to the next page of results.
- * - title: Title of the view, only used when displaying in the admin preview.
- * - title_prefix: Additional output populated by modules, intended to be
- *   displayed in front of the view title.
- * - title_suffix: Additional output populated by modules, intended to be
- *   displayed after the view title.
- * - attachment_before: An optional attachment view to be displayed before the
- *   view content.
- * - attachment_after: An optional attachment view to be displayed after the
- *   view content.
- * - dom_id: Unique id for every view being printed to give unique class for
- *   JavaScript.
- *
- * @see template_preprocess_views_view()
+ * Template: views-view--solutions-view-block--block.html.twig
  */
 #}
 {%
@@ -70,47 +45,45 @@
   {% endif %}
 
   {% if rows %}
-    {# TAC-227: NEW TWO-COLUMN LAYOUT REPLACING ACCORDION #}
+    {# TAC-227: Simple Bootstrap grid approach #}
     <div class="view-content">
-      <div class="row align-items-start">
+      <div class="container">
+        <div class="row h-100 align-items-center">
 
-        {# LEFT COLUMN: Title, description, button - INHERITS COLORS #}
-        <div class="col-12 col-md-6 pe-md-4">
+          {# LEFT COLUMN: Title, description, button #}
+          <div class="col-12 col-md-6" style="margin-top: -20px;">
+            <div class="text-start">
+              <h2 class="display-5 fw-semibold mb-4">
+                Solutions & Services
+              </h2>
 
-          {# Title: NO color specified - inherits from section #}
-          <h2 class="display-5 fw-semibold mb-4">
-            Solutions & Services
-          </h2>
+              <p class="mb-4" style="font-size: 20px; max-width: 527px; height: 107px; line-height: 28px; overflow: hidden;">
+                Tactis offers a comprehensive suite of solutions, including strategy, technology enablement, AI technologies, contact center operations, and marketing.
+              </p>
 
-          {# Description: NO color specified - inherits from section #}
-          <p class="fs-5 mb-4">
-            Tactis offers a comprehensive suite of solutions, including strategy, technology enablement, AI technologies, contact center operations, and marketing.
-          </p>
-
-          {# ADAPTIVE BUTTON: Uses custom class that adapts to any background #}
-          <a href="/solutions" class="btn btn-lg fw-semibold adaptive-outline-btn text-nowrap">
-            View All Solutions & Services
-            <i class="bi bi-arrow-right ms-2"></i>
-          </a>
-        </div>
-
-        {# RIGHT COLUMN: Simple solution links - FORCED WHITE #}
-        <div class="col-12 col-md-6 mt-4 mt-md-0">
-
-          {# Solutions list: Clean, simple list #}
-          <div class="solutions-list">
-            {% for row in rows[0]['#rows'] %}
-              {% set term = row['#taxonomy_term'] %}
-              <div class="solution-item mb-3">
-                <a href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': term.id}) }}"
-                   class="solution-link text-decoration-none fs-5 fw-bold d-block py-2 text-white">
-                  {{ term.name.value }}
-                </a>
-              </div>
-            {% endfor %}
+              <a href="/solutions" class="btn btn-lg fw-semibold adaptive-outline-btn text-nowrap">
+                View All Solutions & Services
+                <i class="bi bi-arrow-right ms-2"></i>
+              </a>
+            </div>
           </div>
-        </div>
 
+          {# RIGHT COLUMN: Solution links #}
+          <div class="col-12 col-md-6 mt-4 mt-md-0">
+            <div class="solutions-list text-center">
+              {% for row in rows[0]['#rows'] %}
+                {% set term = row['#taxonomy_term'] %}
+                <div class="solution-item mb-3">
+                  <a href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': term.id}) }}"
+                     class="solution-link text-decoration-none fs-5 fw-bold d-block py-2 text-white">
+                    {{ term.name.value }}
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   {% elseif empty %}
