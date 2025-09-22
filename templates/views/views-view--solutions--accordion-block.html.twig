@@ -1,15 +1,7 @@
 {#
 /**
  * @file
- * Theme override for solutions view - UPDATED FOR TAC-227
- *
- * CHANGES FOR TAC-227:
- * - Replaced accordion layout with Bootstrap two-column layout
- * - Added title, description, and button to left column
- * - Simple solution links in right column (no accordion)
- * - Bootstrap-first approach with minimal custom CSS
- * - Works with any section background (follows Anthony's guidance)
- * - ADAPTIVE: Button and text colors inherit from section
+ * Theme override for a main view template.
  *
  * Available variables:
  * - attributes: Remaining HTML attributes for the element.
@@ -70,49 +62,17 @@
   {% endif %}
 
   {% if rows %}
-    {# TAC-227: NEW TWO-COLUMN LAYOUT REPLACING ACCORDION #}
-    <div class="view-content">
-      <div class="row align-items-start">
-
-        {# LEFT COLUMN: Title, description, button - INHERITS COLORS #}
-        <div class="col-12 col-md-6 pe-md-4">
-
-          {# Title: NO color specified - inherits from section #}
-          <h2 class="display-5 fw-semibold mb-4">
-            Solutions & Services
-          </h2>
-
-          {# Description: NO color specified - inherits from section #}
-          <p class="fs-5 mb-4">
-            Tactis offers a comprehensive suite of solutions, including strategy, technology enablement, AI technologies, contact center operations, and marketing.
-          </p>
-
-          {# ADAPTIVE BUTTON: Uses custom class that adapts to any background #}
-          <a href="/solutions" class="btn btn-lg fw-semibold adaptive-outline-btn">
-            View All Solutions & Services
-            <i class="bi bi-arrow-right ms-2"></i>
-          </a>
-        </div>
-
-        {# RIGHT COLUMN: Simple solution links - INHERITS COLORS #}
-        <div class="col-12 col-md-6 mt-4 mt-md-0">
-
-          {# Solutions list: Clean, simple list #}
-          <div class="solutions-list">
-            {% for row in rows[0]['#rows'] %}
-              {% set term = row['#taxonomy_term'] %}
-              <div class="solution-item mb-3">
-                <a href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': term.id}) }}"
-                   class="solution-link text-decoration-none fs-5 fw-medium d-block py-2">
-                  {{ term.name.value }}
-                </a>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-
-      </div>
-    </div>
+    {% for row in rows[0]['#rows'] %}
+      {% set term = row['#taxonomy_term'] %}
+      {% include '@tactis_evolve/components/accordion-item.twig' with {
+        'id': 'term-' ~ term.id,
+        'accordion_id': dom_id,
+        'title': term.name.value,
+        'body': term.description.0.value|raw,
+        'button': '<a class="btn btn-tactis-primary link-underline-opacity-0 pt-3-5 pb-3 px-3-5 fs-small fw-semibold" href="' ~ path('entity.taxonomy_term.canonical', {'taxonomy_term': term.id}) ~ '">View ' ~ term.field_link_text.0.value ~ ' <i class="bi bi-arrow-right"></i></a>',
+        'index': loop.index0
+      } only %}
+    {% endfor %}
   {% elseif empty %}
     <div class="view-empty">
       {{ empty }}
