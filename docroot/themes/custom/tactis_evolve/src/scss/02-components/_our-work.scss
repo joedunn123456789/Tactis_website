@@ -1,104 +1,67 @@
-// TAC-228: Our Work Block Styling
-// Complete implementation for views-based client logos
-
+// TAC-228: Our Work Block - Bootstrap-First Implementation
 .our-work-block {
-  padding: 3rem 0;
-
-  .container {
-    max-width: 1200px;
-  }
-
-  // Our Work Title - League Spartan, Semi Bold, 42px, #222222
   .our-work-title {
     font-family: "League Spartan", sans-serif;
     font-weight: 600;
     font-size: 42px;
-    color: #222222;
+    color: var(--section-text-color, #222222);
     line-height: 1.2;
-    margin-bottom: 1.5rem;
   }
 
-  // Description Text - League Spartan, Regular, 20px, #222222
   .our-work-teaser {
     font-family: "League Spartan", sans-serif;
     font-weight: 400;
     font-size: 20px;
-    color: #222222;
-    line-height: 1.4;
+    color: var(--section-text-color, #222222);
+    line-height: 36px;
+    max-width: 800px;
     margin-bottom: 0;
   }
 
   .client-logos-grid {
-    display: grid !important;
-    grid-template-columns: repeat(5, 1fr) !important;
-    grid-template-rows: repeat(2, 1fr) !important;
-    gap: 1.5rem !important;
-    max-width: 900px !important;
-    margin: 0 auto !important;
-    padding: 2rem 0 !important;
-    align-items: center !important;
-    justify-items: center !important;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2rem;
+    width: 1159px;
+    height: 197px;
+    margin: 4rem auto 0;
 
     .views-row {
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-
-      img {
-        max-width: 120px !important;
-        max-height: 60px !important;
-        width: auto !important;
-        height: auto !important;
-      }
-    }
-  }
-
-  // CTA Button - W330 H60, #AF0061 background, #FFFFFF text
-  .our-work-cta {
-    .btn {
-      width: 330px;
-      height: 60px;
-      background-color: #AF0061;
-      border: none;
-      border-radius: 0;
-      color: #FFFFFF;
-      font-family: "League Spartan", sans-serif;
-      font-weight: 600;
-      font-size: 20px;
       display: flex;
-      align-items: center;
       justify-content: center;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      align-items: center;
 
-      &:hover, &:focus {
-        background-color: #8a004e;
-        color: #FFFFFF;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(175, 0, 97, 0.3);
-      }
-
-      .bi-arrow-right {
-        margin-left: 0.5rem;
-        font-size: 16px;
+      .views-field .field-content img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
       }
     }
   }
-}
 
-// Dark background adaptation
-.bg-black,
-.bg-tactis-secondary,
-.bg-tactis-tertiary,
-.section-dark {
-  .our-work-block {
-    .our-work-title,
-    .our-work-teaser {
-      color: #FFFFFF;
+  .our-work-cta .btn {
+    width: 330px;
+    height: 60px;
+    background-color: #AF0061;
+    border: none;
+    border-radius: 0;
+    color: #FFFFFF;
+    font-family: "League Spartan", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #8a004e;
     }
 
-    .client-logos-grid .views-row svg {
-      fill: #FFFFFF;
+    .bi-arrow-right {
+      margin-left: 0.5rem;
     }
   }
 }
@@ -106,10 +69,9 @@
 // Responsive Design
 @include media-breakpoint-down(lg) {
   .our-work-block {
-    .client-logos-grid .view-content {
+    .client-logos-grid {
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: auto;
-      gap: 1.5rem 1rem;
     }
 
     .our-work-cta .btn {
@@ -129,14 +91,17 @@
       font-size: 18px;
     }
 
-    .client-logos-grid .view-content {
+    .client-logos-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
     }
+  }
+}
 
-    .client-logos-grid .views-row svg {
-      max-width: 120px;
-      max-height: 60px;
+// Component-specific logo adaptation
+.paragraph--type--section.text-white {
+  .our-work-block {
+    .client-logos-grid img {
+      filter: brightness(0) invert(1); // Only TAC-228 logos turn white
     }
   }
 }
