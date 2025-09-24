@@ -1,0 +1,154 @@
+{#
+/**
+ * @file
+ * TAC-228: Our Work block template
+ * Template for Our Work block with client logos from Media Library
+ *
+ * This template creates a 3-column layout matching Figma design:
+ * - Left: Title and teaser text
+ * - Center: Client logos grid (2 rows x 5 logos = 10 total)
+ * - Right: Call-to-action button
+ *
+ * Available variables:
+ * - title: Block title
+ * - teaser_text: Introductory text
+ * - client_logos: Array of media entities or media URLs
+ * - cta_text: Call-to-action button text
+ * - cta_url: Call-to-action button URL
+ * - attributes: HTML attributes for the containing element
+ */
+#}
+
+{%
+  set classes = [
+  'our-work-block',
+  'py-5',
+  'container-fluid'
+]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  <div class="container">
+    <div class="row align-items-center">
+
+      {# Left Column: Title and Teaser #}
+      <div class="col-12 col-lg-4 mb-4 mb-lg-0">
+        <div class="our-work-content">
+          {% if title %}
+            <h2 class="our-work-title display-5 fw-semibold mb-3 text-lowercase">{{ title }}.</h2>
+          {% endif %}
+
+          {% if teaser_text %}
+            <div class="our-work-teaser mb-4">
+              {{ teaser_text }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      {# Center Column: Client Logos Grid - 2 rows x 5 logos #}
+      <div class="col-12 col-lg-5 mb-4 mb-lg-0">
+        <div class="client-logos-grid">
+          {% if client_logos %}
+            <div class="logos-container">
+              {# First row - 5 logos #}
+              <div class="row g-3 mb-3 align-items-center justify-content-center">
+                {% for logo in client_logos|slice(0, 5) %}
+                  <div class="col">
+                    <div class="client-logo-item text-center">
+                      {% if logo.entity %}
+                        {# Handle Drupal media entities #}
+                        {% set media_entity = logo.entity %}
+                        {% if media_entity.field_media_image.entity %}
+                          {% set image_url = file_url(media_entity.field_media_image.entity.fileuri) %}
+                          {% set alt_text = media_entity.field_media_image.alt %}
+                        {% elseif media_entity.field_media_svg.entity %}
+                          {% set image_url = file_url(media_entity.field_media_svg.entity.fileuri) %}
+                          {% set alt_text = media_entity.name.value %}
+                        {% endif %}
+                      {% elseif logo.image_url %}
+                        {# Handle direct URLs #}
+                        {% set image_url = logo.image_url %}
+                        {% set alt_text = logo.alt_text|default('Client logo') %}
+                      {% endif %}
+
+                      {% if image_url %}
+                        <img src="{{ image_url }}"
+                             alt="{{ alt_text|default('Client logo') }}"
+                             class="client-logo-img img-fluid"
+                             loading="lazy">
+                      {% else %}
+                        {# Placeholder for missing images #}
+                        <div class="client-logo-placeholder">
+                          <span class="placeholder-text">Logo</span>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+
+              {# Second row - remaining logos #}
+              {% if client_logos|length > 5 %}
+                <div class="row g-3 align-items-center justify-content-center">
+                  {% for logo in client_logos|slice(5, 5) %}
+                    <div class="col">
+                      <div class="client-logo-item text-center">
+                        {% if logo.entity %}
+                          {# Handle Drupal media entities #}
+                          {% set media_entity = logo.entity %}
+                          {% if media_entity.field_media_image.entity %}
+                            {% set image_url = file_url(media_entity.field_media_image.entity.fileuri) %}
+                            {% set alt_text = media_entity.field_media_image.alt %}
+                          {% elseif media_entity.field_media_svg.entity %}
+                            {% set image_url = file_url(media_entity.field_media_svg.entity.fileuri) %}
+                            {% set alt_text = media_entity.name.value %}
+                          {% endif %}
+                        {% elseif logo.image_url %}
+                          {# Handle direct URLs #}
+                          {% set image_url = logo.image_url %}
+                          {% set alt_text = logo.alt_text|default('Client logo') %}
+                        {% endif %}
+
+                        {% if image_url %}
+                          <img src="{{ image_url }}"
+                               alt="{{ alt_text|default('Client logo') }}"
+                               class="client-logo-img img-fluid"
+                               loading="lazy">
+                        {% else %}
+                          {# Placeholder for missing images #}
+                          <div class="client-logo-placeholder">
+                            <span class="placeholder-text">Logo</span>
+                          </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          {% else %}
+            {# Placeholder for when no logos are available #}
+            <div class="client-logos-placeholder-section text-center py-4">
+              <p class="text-muted">Client logos will appear here once media library is restored</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      {# Right Column: Call-to-Action Button #}
+      <div class="col-12 col-lg-3">
+        <div class="our-work-cta text-center text-lg-end">
+          {% if cta_text and cta_url %}
+            <a href="{{ cta_url }}"
+               class="btn btn-tactis-primary pt-3-5 pb-3 px-3-5 fs-small fw-semibold">
+              {{ cta_text }}
+              <i class="bi bi-arrow-right ms-2 fw-semibold"></i>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
