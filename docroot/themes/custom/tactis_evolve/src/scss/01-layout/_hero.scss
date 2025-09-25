@@ -1,4 +1,5 @@
-// Fixed hero SCSS - Remove gradient background for hero-split
+// _hero.scss - Contains ONLY hero region and content styling
+
 .region-hero {
   z-index: 405;
 
@@ -8,24 +9,11 @@
 }
 
 body {
+  // Hero region positioning and styling for dark/light heroes
   &.hero-dark, &.hero-light {
-    header {
-      background: $tactis-gradient; // Keep gradient for dark/light heroes
-      height: calc($header-height + $hero-height-sm); // 88px + 375px = 463px mobile
-
-      @include media-breakpoint-up(md){
-        height: calc($header-height + $hero-height-md); // 88px + 450px = 538px desktop
-      }
-
-      .region-header {
-        @extend .bg-white;
-      }
-    }
-
-    // ONLY dark/light heroes need the top positioning for overlay effect
     .region-hero {
-      top: $header-height; // 88px positioning for overlay
-      color: $white; // Default to white, override in &.hero-light if needed
+      top: $header-height; // 88px positioning for overlay effect
+      color: $white; // Default to white
     }
   }
 
@@ -35,21 +23,11 @@ body {
     }
   }
 
+  // Hero region styling for split layout
   &.hero-split {
-    header {
-      // REMOVED: background: $tactis-gradient; - This was causing the dark section
-      background: $white; // Use white background for split hero
-      height: $header-height; // Only header height, no extra hero height
-
-      .region-header {
-        @extend .bg-white;
-      }
-    }
-
     .region-hero {
       background-color: $white;
-      // CRITICAL: NO top positioning - let it flow naturally
-      position: relative !important; // Force relative positioning
+      position: relative !important; // Force relative positioning - no overlay
       top: auto !important; // Override any inherited top values
     }
 
@@ -105,6 +83,7 @@ body {
     }
   }
 
+  // General hero region sizing
   .region-hero {
     height: $hero-height-sm; // 375px mobile
 
@@ -152,18 +131,19 @@ body {
     }
   }
 
+  // Main content margin calculations based on hero type
   main {
-    // Different margin calculations for each hero type
-    margin-top: calc($hero-height-sm + $header-height); // Default for dark/light heroes
+    // Default margin for dark/light heroes (with overlay)
+    margin-top: calc($hero-height-sm + $header-height);
 
     @include media-breakpoint-up(md){
       margin-top: calc($hero-height-md + $header-height);
     }
   }
 
-  // Override main margin for hero-split to only account for header
+  // Override main margin for hero-split (no overlay, flows naturally)
   &.hero-split main {
-    margin-top: calc($header-height + $hero-height-sm); // Header + hero content height
+    margin-top: calc($header-height + $hero-height-sm);
 
     @include media-breakpoint-up(md){
       margin-top: calc($header-height + $hero-height-md);
@@ -171,7 +151,28 @@ body {
   }
 }
 
-// Additional mobile-specific fixes
+// Admin toolbar integration - hero region positioning
+body {
+  &.toolbar-horizontal {
+    .region-hero {
+      top: calc($header-height + $admin-toolbar-height-collapsed);
+    }
+
+    &.toolbar-tray-open {
+      .region-hero {
+        top: calc($header-height + $admin-toolbar-height-collapsed + $admin-toolbar-horizontal);
+      }
+    }
+  }
+
+  &.toolbar-vertical {
+    .region-hero {
+      top: calc($header-height + $admin-toolbar-height-collapsed);
+    }
+  }
+}
+
+// Mobile-specific hero fixes
 @media (max-width: 767.98px) {
   body.hero-split {
     // Force everything in hero-split to be static on mobile
@@ -183,7 +184,7 @@ body {
       bottom: auto !important;
     }
 
-    // Ensure header still works
+    // Ensure header still works (this affects hero positioning)
     header, .region-header {
       position: sticky !important;
       top: 0 !important;

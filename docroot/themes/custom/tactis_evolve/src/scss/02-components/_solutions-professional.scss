@@ -1,4 +1,5 @@
-// TAC-227: Ghost Button Logic
+// TAC-227: Complete SCSS - Ghost Button + Solutions View Block
+// ADAPTIVE GHOST BUTTON
 .adaptive-outline-btn {
   background-color: transparent !important;
   border: 2px solid $tactis-secondary !important;
@@ -23,7 +24,7 @@
   }
 }
 
-// White outline for dark backgrounds
+// WHITE BUTTON FOR DARK BACKGROUNDS
 .paragraph--type--section.text-light .adaptive-outline-btn {
   background-color: transparent !important;
   border: 2px solid $white !important;
@@ -48,40 +49,25 @@
   }
 }
 
-// Solutions View Block - Bootstrap Grid with Figma Spacing
+// SOLUTIONS VIEW BLOCK
 .view-solutions-view-block {
   width: min(1440px, 100vw);
   min-height: 446px;
   aspect-ratio: 1440/446;
 
-  // Use padding to position content like Figma
-  padding: 80px 100px 80px 99px; // top right bottom left
+  display: flex; //flexbot
+  align-items: center; //center flexbot
 
   @include media-breakpoint-down(lg) {
     aspect-ratio: unset;
     min-height: auto;
-    padding: 2rem;
   }
 
   .view-content {
     width: 100%;
-    height: 100%;
-
-    .row {
-      height: 100%;
-      align-items: flex-start; // Align to top of container
-    }
-
-    // Remove absolute positioning, use Bootstrap grid
-    .col-md-6:first-child {
-      // Content will flow naturally within the padded area
-    }
-
-    .col-md-6:last-child {
-      // Content will flow naturally within the padded area
-    }
   }
 
+  // Solution links styling
   .solutions-list {
     .solution-item {
       border-bottom: 2px solid rgba(255, 255, 255, 0.5) !important;
@@ -114,6 +100,7 @@
     }
   }
 
+  // Responsive adjustments
   @include media-breakpoint-down(md) {
     .solution-link {
       font-size: 1.1rem !important;

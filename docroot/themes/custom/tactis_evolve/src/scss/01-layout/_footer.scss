@@ -1,36 +1,30 @@
 footer {
-  // ================================
   // DESKTOP FOOTER TOP RIGHT REGION
-  // ================================
   .region-footer-top-right {
     .webform-submission-form {
-      float: right !important;        // Pushes entire form to right side
-      clear: both !important;         // Prevents overlapping with other floated elements
-      width: 400px !important;        // Sets total form width (email + button)
+      @extend .float-end;
+      width: 400px;
 
       .js-form-item-stayconnectedemail {
-        display: inline-block !important;  // Places email field inline with button
-        margin: 0 !important;             // Removes default margins
-        padding: 0 !important;            // Removes default padding
-        vertical-align: top !important;   // Aligns to top baseline
+        @extend .d-inline-block;
+        @extend .m-0;
+        @extend .p-0;
 
         input {
-          width: 340px !important;        // Email field takes 340px of 400px total
-          height: 60.28px !important;     // Matches button height exactly
+          width: 340px !important;
+          height: 60.28px !important;
           box-sizing: border-box !important;
         }
       }
 
       .form-actions {
-        display: inline-block !important;  // Places button inline with email field
-        margin: 0 !important;             // Removes default margins
-        padding: 0 !important;            // Removes default padding
-        vertical-align: top !important;   // Aligns to top baseline
-        margin-left: -1px !important;     // Eliminates gap between email and button
+        @extend .d-inline-block;
+        @extend .m-0;
+        @extend .p-0;
 
         input {
-          width: 60px !important;         // Button takes remaining 60px of 400px total
-          height: 60.28px !important;     // Matches email field height exactly
+          width: 60px !important;
+          height: 60.28px !important;
           box-sizing: border-box !important;
           margin: 0 !important;
         }
@@ -38,96 +32,86 @@ footer {
     }
   }
 
-  // ================================
   // DESKTOP FOOTER TOP MAIN SECTION
-  // ================================
   .region-footer-top {
-    // Tactis logo styling
     .tactis-logo-white {
-      width: 133px !important;          // Logo dimensions
-      height: 56px !important;
-      background-size: 133px 56px;      // Ensures logo scales properly
+      width: 133px;
+      height: 56px;
+      background-size: 133px 56px;
 
       a {
-        width: 133px;                    // Makes entire logo area clickable
+        width: 133px;
         height: 56px;
-        display: block;
+        @extend .d-block;
       }
     }
 
-    // Social media icons styling
     .menu--footer-social {
       ul {
-        display: flex;                   // Arranges social icons horizontally
+        display: flex; // Using @extend .d-flex causes an admin toolbar z-index position conflict. Not noticed on different browser as unath user
         flex-direction: row;
-        list-style: none;               // Removes bullet points
-        padding: 0;
-        margin: 0;
-        gap: 1rem;                      // Space between social icons
+        @extend .list-unstyled;
+        @extend .p-0;
+        @extend .m-0;
+        gap: 1rem;
       }
 
       li {
-        display: inline-block;           // Makes list items horizontal
+        @extend .d-inline-block;
       }
 
       a {
-        font-size: 0;                    // Hides text, shows only icons
+        font-size: 0;
 
         &::before {
-          font-family: bootstrap-icons !important;  // Uses Bootstrap Icons font
-          font-size: 1.5rem;                       // Icon size
+          font-family: bootstrap-icons !important;
+          font-size: 1.5rem;
           display: inline-block;
         }
 
-        // Sets specific icons for each social platform
-        &[href*="facebook"]::before { content: "\f344"; }  // Facebook icon
-        &[href*="linkedin"]::before { content: "\f472"; }  // LinkedIn icon
+        &[href*="facebook"]::before { content: "\f344"; }  // Bootstrap Facebook
+        &[href*="linkedin"]::before { content: "\f472"; }  // Bootstrap LinkedIn
       }
     }
 
-    // Desktop newsletter form layout
     .webform-submission-form {
-      text-align: right !important;     // Right-aligns the form
+      text-align: right !important;
 
       .js-form-item-stayconnectedemail,
       .form-actions {
-        float: left !important;        // Float elements to create side-by-side layout
+        float: left !important;
         margin: 0 !important;
         padding: 0 !important;
       }
 
       &::after {
-        content: "";                   // Clearfix to contain floated elements
+        content: "";
         display: table;
         clear: both;
       }
     }
 
-    // Specific desktop input field styling
     #edit-stayconnectedemail {
-      width: 340px !important;
-      height: 60.28px !important;
-      box-sizing: border-box !important;
-      border-top-right-radius: 0 !important;    // Removes right border radius for seamless connection
-      border-bottom-right-radius: 0 !important;
+      width: 340px;
+      height: 60.28px;
+      box-sizing: border-box;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
     }
 
-    // Specific desktop submit button styling
     #edit-actions-submit {
-      width: 60px !important;
-      height: 60.28px !important;
-      box-sizing: border-box !important;
-      border-top-left-radius: 0 !important;     // Removes left border radius for seamless connection
-      border-bottom-left-radius: 0 !important;
-      border-left: none !important;             // Removes left border to connect with input
-      background-color: var(--bs-tactis-primary) !important;  // Tactis brand color
-      border-color: var(--bs-tactis-primary) !important;
+      width: 60px;
+      height: 60.28px;
+      box-sizing: border-box;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: none;
+      background-color: var(--bs-tactis-primary);
+      border-color: var(--bs-tactis-primary);
     }
   }
 
-  // ================================
   // DESKTOP FOOTER BOTTOM SECTION
-  // ================================
   .region-footer-bottom {
     .d-md-flex {
       justify-content: flex-start !important;   // Aligns items to left
@@ -135,203 +119,187 @@ footer {
     }
 
     #block-tactis-evolve-copyrightstatement {
-      margin-right: auto !important;           // Pushes copyright to far left
+      @extend .me-auto;
     }
 
     .block-menu {
-      display: inline-block !important;        // Makes menu blocks horizontal
-      margin-left: 1rem !important;           // Space between menu blocks
+      @extend .d-inline-block;
+      @extend .ms-3;
 
       &:first-of-type {
         margin-left: 2rem !important;         // Extra space for first menu block
       }
 
       .nav.navbar-nav {
-        display: flex !important;             // Horizontal menu layout
-        flex-direction: row !important;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        gap: 1.5rem;                          // Space between menu items
+        @extend .d-flex;
+        @extend .flex-row;
+        @extend .list-unstyled;
+        @extend .m-0;
+        @extend .p-0;
+        gap: 1.5rem;
       }
 
       .nav-item {
-        display: inline-block;                // Horizontal menu items
+        @extend .d-inline-block;
       }
 
       .nav-link {
-        padding: 0;                           // Removes default link padding
-        margin: 0;
+        @extend .p-0;
+        @extend .m-0;
       }
     }
   }
 
-  // ============================================
   // MOBILE SECTION - TAC-235
-  // ============================================
   @include media-breakpoint-down(md) {
-
-    // Mobile Footer Top Section Layout
     .region-footer-top {
-      text-align: center !important;          // Centers all content on mobile
+      text-align: center !important;
 
       .d-md-flex {
-        display: flex !important;            // Stack elements vertically on mobile
+        display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         text-align: center !important;
       }
 
-      // Logo and address section (top)
       .col-md-6:first-child {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         text-align: center !important;
-        order: 1 !important;                  // Shows first
+        order: 1 !important;
         margin-bottom: 2rem !important;
       }
 
-      // Newsletter section (bottom)
       .col-md-6:last-child {
-        order: 2 !important;                  // Shows second
+        order: 2 !important;
         margin-top: 1.5rem !important;
         display: flex !important;
         justify-content: center !important;
         width: 100% !important;
       }
 
-      // Centers logo on mobile
       .tactis-logo-white {
         margin: 0 auto 1.5rem auto !important;
       }
 
-      // Centers address block on mobile
       #block-tactis-evolve-tactisaddress {
         text-align: center !important;
         margin-bottom: 1.5rem !important;
       }
 
-      // Mobile social icons - circular style
       .menu--footer-social {
         text-align: center !important;
         margin-bottom: 2rem !important;
 
         ul {
-          justify-content: center !important;  // Centers social icons
+          justify-content: center !important;
           gap: 1.5rem !important;
         }
 
         a {
-          width: 40px !important;             // Circular icon containers
+          width: 40px !important;
           height: 40px !important;
-          border: 2px solid white !important; // White circle border
-          border-radius: 50% !important;      // Makes circles
+          border: 2px solid white !important;
+          border-radius: 50% !important;
           display: inline-flex !important;
           align-items: center !important;
           justify-content: center !important;
           text-decoration: none !important;
 
           &::before {
-            font-size: 1.2rem !important;     // Smaller icon size for mobile
+            font-size: 1.2rem !important;
             color: white !important;
           }
         }
       }
 
-      // Mobile newsletter form - overlay approach
       .webform-submission-form {
-        text-align: center !important;
-        float: none !important;               // Remove desktop float
-        width: 100% !important;
+        text-align: center;
+        float: none !important;               // removing important causes the button to move up 5-7 pixels
+        width: 100%;
         max-width: 400px !important;
-        margin: 1rem auto 0 auto !important; // Centers form horizontally
-        position: relative !important;        // Creates positioning context for absolute button
+        margin: 1rem auto 0 auto !important;
+        position: relative !important;
 
         .js-form-item-stayconnectedemail,
         .form-actions {
-          float: none !important;             // Remove desktop floats
+          float: none !important;
         }
       }
 
       .text-end {
-        text-align: center !important;       // Override right-align on mobile
+        text-align: center !important;
       }
 
-      // Mobile email input - full width with padding for button
       .js-form-item-stayconnectedemail {
         position: relative !important;
         width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
+        margin: 0;
+        padding: 0;
 
         input {
-          width: 100% !important;             // Takes full width
+          width: 100% !important;
           height: 50px !important;
-          padding: 0.75rem 4rem 0.75rem 1rem !important; // Right padding makes space for button
-          border-radius: 4px !important;
-          font-size: 1rem !important;
+          padding: 0.75rem 4rem 0.75rem 1rem !important;
+          border-radius: 4px;
+          font-size: 1rem;
           box-sizing: border-box !important;
           border: 1px solid #ccc !important;
         }
       }
 
-      // Mobile submit button - overlays on right side of email input
       .form-actions {
         position: absolute !important;
         top: 118px !important;               // THIS CONTROLS VERTICAL POSITION (UP/DOWN)
-        right: 0 !important;                 // Positions at right edge
-        margin: 0 !important;
-        padding: 0 !important;
+        right: 0 !important;
+        margin: 0;
+        padding: 0;
 
         input {
-          height: 50px !important;           // Matches email input height
-          width: 50px !important;            // Square button
-          border-radius: 0 4px 4px 0 !important; // Only right side rounded
+          height: 50px !important;
+          width: 50px !important;
+          border-radius: 0 4px 4px 0 !important;
           font-size: 1.2rem !important;
           box-sizing: border-box !important;
           border: none !important;
-          margin: 0 !important;
+          margin: 0;
           cursor: pointer !important;
         }
       }
 
-      // Override desktop input styling for mobile
       #edit-stayconnectedemail {
         width: 100% !important;
         max-width: none !important;
-        border-top-right-radius: 4px !important;    // Restore full border radius
+        border-top-right-radius: 4px !important;
         border-bottom-right-radius: 4px !important;
       }
 
       #edit-actions-submit {
-        border-top-left-radius: 0 !important;       // Keep left side flat for overlay
+        border-top-left-radius: 0 !important;
         border-bottom-left-radius: 0 !important;
       }
     }
 
-    // Mobile Footer Bottom Section - Stacked Layout
     .region-footer-bottom {
       padding-top: 2rem !important;
 
       .d-md-flex {
         display: flex !important;
-        flex-direction: column !important;   // Stack copyright and menus vertically
+        flex-direction: column !important;
         align-items: center !important;
         text-align: center !important;
         gap: 1.5rem !important;
       }
 
-      // Copyright shows first
       #block-tactis-evolve-copyrightstatement {
-        margin-right: 0 !important;
+        margin-right: 0 !important; //Copyright block loses center formatting if no !important
         order: 1 !important;
-        text-align: center !important;
+        text-align: center;
         margin-bottom: 1rem !important;
-        font-size: 0.9rem !important;
+        font-size: 0.9rem;
       }
 
-      // Menu blocks stack vertically
       .block-menu {
         display: block !important;
         margin: 0 !important;

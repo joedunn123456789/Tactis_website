@@ -1,9 +1,13 @@
 .paragraph--type--section {
   &.text-white {
     --section-text-color: $white ;
+    //--section-logo-filter: brightness(0) invert(1); // Turn ALL SVGs turn white
   }
   &.bg-black {
     --section-bg-color: $black;
+  }
+  &.bg-plum {
+    background-color: #682145 !important;
   }
 
   &.is_parallax {
