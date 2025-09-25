@@ -1,3 +1,5 @@
+// _header.scss - Contains ONLY header-specific styling and behavior
+
 header {
   @extend .bg-white;
   top: 0;
@@ -200,9 +202,15 @@ body {
   @extend .align-items-center;
 
   img {
+<<<<<<< HEAD
     @extend .img-fluid;
     max-width: 184px !important;
     max-height: 50px !important;
+=======
+    max-width: 184px !important;
+    max-height: 50px !important;
+    width: auto;
+>>>>>>> 7b14b3d145e88d8b9f86a89916b96c0ebdf15a63
     height: auto;
   }
 }
